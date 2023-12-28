@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
       </body>
   </html>";
     if ($mail->send()) {
-      header('Location: #');  // Adjust the URL as needed
+      header('Location: #'); // Adjust the URL as needed
       exit();
     }
     $output = '<div class="alert alert-success"><h5>Thankyou! for contacting us, Well get back to you soon!</h5>
@@ -117,6 +117,7 @@ if (isset($_POST['submit'])) {
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css' />
 </head>
 
+<!-- body content start  -->
 <body class="bg-info">
   <div class="container">
     <div class="row justify-content-center">
@@ -125,7 +126,8 @@ if (isset($_POST['submit'])) {
           <div class="card-header bg-danger text-light">
             <h3 class="card-title">Contact Us</h3>
           </div>
-          <div class="card-body px-4">
+          <div class="card-body px-4"> 
+            <!-- Main form start for mail sender  -->
             <form action="#" method="POST" id="contactForm">
               <div class="form-group">
                 <?= $output; ?>
@@ -148,14 +150,16 @@ if (isset($_POST['submit'])) {
               </div>
               <div class="form-group">
                 <input type="submit" name="submit" value="Send" class="btn btn-danger btn-block" id="sendBtn">
-              </div>
-            </form>
+              </div>          
+            </form> <!-- form End for mail sender -->
           </div>
         </div>
       </div>
     </div>
   </div>
 </body>
+<!-- body content start  -->
+<!-- Script for reset action  -->
 <script>
   // Reset the form on successful submission
   if (xhr.status === 200) { // Assuming `xhr` is your XMLHttpRequest object
