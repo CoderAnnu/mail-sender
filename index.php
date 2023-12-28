@@ -1,4 +1,3 @@
-
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -8,43 +7,42 @@ use PHPMailer\PHPMailer\SMTP;
 
 //   use PHPMailerPHPMailerPHPMailer;
 //   use PHPMailerPHPMailerException;
-  require 'PHPMailer/src/Exception.php';
-  require 'PHPMailer/src/PHPMailer.php';
-  require 'PHPMailer/src/SMTP.php';
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 
-  // Include autoload.php file
+// Include autoload.php file
 //   require 'vendor/autoload.php';
-  // Create object of PHPMailer class
-  $mail = new PHPMailer(true);
+// Create object of PHPMailer class
+$mail = new PHPMailer(true);
 
-  $output = '';
+$output = '';
 
-  if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $subject = $_POST['subject'];
-    $message = $_POST['message'];
+if (isset($_POST['submit'])) {
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $subject = $_POST['subject'];
+  $message = $_POST['message'];
 
-    try {
-      $mail->isSMTP();
-      $mail->Host = 'smtp.gmail.com';
-      $mail->SMTPAuth = true;
-      // Gmail ID which you want to use as SMTP server
-      $mail->Username = 'akrajput01206@gmail.com';
-      // Gmail Password
-      $mail->Password = 'opytjqcbkojqwfyx';
-      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-      $mail->Port = 587;
+  try {
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    // Gmail ID which you want to use as SMTP server
+    $mail->Username = 'akrajput01206@gmail.com';
+    // Gmail Password
+    $mail->Password = 'opytjqcbkojqwfyx';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
 
-      // Email ID from which you want to send the email
-      $mail->setFrom('akrajput01206@gmail.com');
-      // Recipient Email ID where you want to receive emails
-      $mail->addAddress('akrajput01206@gmail.com');
+    // Email ID from which you want to send the email
+    $mail->setFrom('akrajput01206@gmail.com');
+    // Recipient Email ID where you want to receive emails
+    $mail->addAddress('akrajput01206@gmail.com');
 
-      $mail->isHTML(true);
-      $mail->Subject = 'Form Submission';
-    //   $mail->Body = "<h3>Name : $name <br>Email : $email <br>Message : $message</h3>";
-      $mail->Body =  "<html xmlns='http://www.w3.org/1999/xhtml'>
+    $mail->isHTML(true);
+    $mail->Subject = 'Form Submission';
+    $mail->Body =  "<html xmlns='http://www.w3.org/1999/xhtml'>
       <head>
           <title>EdiQue</title>
           <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
@@ -62,13 +60,13 @@ use PHPMailer\PHPMailer\SMTP;
                                   <table width='100%' cellpadding='0' cellspacing='0'>
                                       <tr>
                                           <td align='left' style='font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 23px;'>
-                                              Sender Name : ".$name."
+                                              Sender Name : " . $name . "
                                               <br/>
-                                              Email : ".$email."
+                                              Email : " . $email . "
                                               <br/>
-                                              Mail for  : ".$subject."
+                                              Mail for  : " . $subject . "
                                               <br/>
-                                              Details: ".$message."
+                                              Details: " . $message . "
                                               <!-- Please click on below link to verify your email: -->
                                           </td>
                                       </tr>
@@ -93,21 +91,22 @@ use PHPMailer\PHPMailer\SMTP;
           </table>
       </body>
   </html>";
-if ($mail->send()){
-  header('Location: #');  // Adjust the URL as needed
-    exit();
-}
-      // $mail->send();
-      $output = '<div class="alert alert-success"><h5>Thankyou! for contacting us, Well get back to you soon!</h5>
+    if ($mail->send()) {
+      header('Location: #');  // Adjust the URL as needed
+      exit();
+    }
+    $output = '<div class="alert alert-success"><h5>Thankyou! for contacting us, Well get back to you soon!</h5>
                 </div> ';
-    } catch (Exception $e) {
-      $output = '<div class="alert alert-danger">
+  } catch (Exception $e) {
+    // when something when wrong or showing error
+    $output = '<div class="alert alert-danger">
                   <h5>' . $e->getMessage() . '</h5>
                 </div>';
-    }
   }
+}
 
 ?>
+<!-- Html content start  -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -127,7 +126,7 @@ if ($mail->send()){
             <h3 class="card-title">Contact Us</h3>
           </div>
           <div class="card-body px-4">
-          <form action="#" method="POST" id="contactForm">
+            <form action="#" method="POST" id="contactForm">
               <div class="form-group">
                 <?= $output; ?>
               </div>
@@ -141,13 +140,11 @@ if ($mail->send()){
               </div>
               <div class="form-group">
                 <label for="subject">Subject</label>
-                <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter Subject"
-                  required>
+                <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter Subject" required>
               </div>
               <div class="form-group">
                 <label for="message">Message</label>
-                <textarea name="message" id="message" rows="5" class="form-control" placeholder="Write Your Message"
-                  required></textarea>
+                <textarea name="message" id="message" rows="5" class="form-control" placeholder="Write Your Message" required></textarea>
               </div>
               <div class="form-group">
                 <input type="submit" name="submit" value="Send" class="btn btn-danger btn-block" id="sendBtn">
@@ -162,20 +159,18 @@ if ($mail->send()){
 <script>
   // Reset the form on successful submission
   if (xhr.status === 200) { // Assuming `xhr` is your XMLHttpRequest object
+    document.addEventListener('DOMContentLoaded', function() {
+      var contactForm = document.getElementById('contactForm');
+      var sendBtn = document.getElementById('sendBtn');
+      contactForm.reset();
 
-  document.addEventListener('DOMContentLoaded', function () {
-    var contactForm = document.getElementById('contactForm');
-    var sendBtn = document.getElementById('sendBtn');
-    contactForm.reset();
-
-  });
+    });
   }
-    if (contactForm && sendBtn) {
-      sendBtn.addEventListener('click', function () {
-        contactForm.reset();
-      });
-    }
-    </script>
-    
+  if (contactForm && sendBtn) {
+    sendBtn.addEventListener('click', function() {
+      contactForm.reset();
+    });
+  }
+</script>
 
-</html>
+</html> <!-- Html content start  -->
